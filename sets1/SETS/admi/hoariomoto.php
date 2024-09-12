@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sets - MOTO</title>
+    <link rel="shortcut icon" href="img/c.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/citas.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="topbar">
+                <div class="menu-left">
+                    <img src="img/ajustes.png" alt="Admin" class="admin-img">
+                    <a class="menu-button">Admin</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Perfil.html">Editar datos</a></li>
+                        <li><a href="#">Reportar problema</a></li>
+                        <li><a href="index.html">Cerrar sesión</a></li>
+                    </ul>
+                    <a href="notificaciones.html">
+                        <img src="img/notificacion.png" alt="Notificaciones" class="notification">
+                    </a>
+                </div>
+                <div class="menu-right">
+                    <div class="chat">
+                        <button class="menu-button"></button>
+                        <img src="img/hablando.png" alt="Chat" class="chat-button" id="chatToggle">
+                        <button class="menu-button"></button>
+    
+                        <img src="img/C.png" alt="Chat" class="chat-button">
+                        <div class="chat-menu">
+                            <div class="search-container">
+                                <input type="text" placeholder="Buscar" class="search-bar" onkeyup="filterChat()">
+                            </div>
+                            <br>
+                            <div class="chat-links">
+                                <a href="#" class="chat-item" onclick="openChat('ADMINISTRADOR')">ADMINISTRADOR</a>
+                                <a href="#" class="chat-item" onclick="openChat('GUARDA DE SEGURIDAD')">GUARDA DE SEGURIDAD</a>
+                                <a href="#" class="chat-item" onclick="openChat('Chat Comunal')">Chat Comunal</a>
+                                <a href="#" class="chat-item" onclick="openChat('Residente')">Residente</a>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <br>
+        <main>
+            <section class="chat-container" id="chatContainer">
+                <header class="chat-header">
+                    <span id="chatHeader">Chat</span>
+                    <button class="close-btn" onclick="closeChat()">×</button>
+                </header>
+                <div class="chat-messages" id="chatMessages">
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
+                    <button onclick="sendMessage()">Enviar</button>
+                </div>
+            </section>
+        </main>
+    <main>
+        <section class="anuncio">
+            <h2>Horario MOTO</h2>
+        </section>
+        <div class="container">
+            <div class="calendar-container">
+                <div class="calendar">
+                    <h2>Parqueadero</h2>
+                    <br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Zona </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>7</td>
+                                <td>8</td>
+                                <td>9</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">11</td>
+                                <td>12</td>
+                                <td>13</td>
+                                <td>14</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td class="highlight">17</td>
+                                <td>18</td>
+                                <td>19</td>
+                                <td>20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+
+            <!-- Citas Agendadas -->
+            <div class="sidebar">
+                <h2> Solicitud de Agendaciones</h2>
+                <br>
+                <div class="barra">
+                    <div class="sombra"></div>
+                    <input type="text" placeholder="Buscar moto...">
+                    <ion-icon name="search-outline"></ion-icon>
+                </div>
+                <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+                <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+                <br>
+                <div class="appointment">
+                    <h3>Parqueadero Moto</h3>
+                    <p>Número de Parqueadero: 11</p>
+                    <p>Placa Vehículo: XYZ123</p>
+                    <p>Modelo Vehículo: Yamaha MT-07</p>
+                    <p>Piso: 1</p>
+                    <p>Torre: 2</p>
+                    <p>Nombre Solicitante: Carlos Gómez</p>
+                    <p>Documento Solicitante: 11223344</p>
+                    <div class="buttons">
+                        <button class="button accept">Aceptar</button>
+                        <button class="button delete">Eliminar</button>
+                        <button class="button pending">Pendiente</button>
+                    </div>
+                </div>
+
+                <div class="appointment">
+                    <h3>Parqueadero Moto</h3>
+                    <p>Número de Parqueadero: 17</p>
+                    <p>Placa Vehículo: XYZ123</p>
+                    <p>Modelo Vehículo: Yamaha MT-07</p>
+                    <p>Piso: 1</p>
+                    <p>Torre: 2</p>
+                    <p>Nombre Solicitante: Carlos Gómez</p>
+                    <p>Documento Solicitante: 11223344</p>
+                    <div class="buttons">
+                        <button class="button accept">Aceptar</button>
+                        <button class="button delete">Eliminar</button>
+                        <button class="button pending">Pendiente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="paromoto.html" class="btn-back">
+            <center>VOLVER</center>
+        </a>
+        <script>
+            document.querySelector('.admin-img').addEventListener('click', function () {
+                document.querySelector('.dropdown-menu').classList.toggle('show');
+            });
+
+            document.querySelector('.chat-button').addEventListener('click', function () {
+                document.querySelector('.chat-menu').classList.toggle('show');
+            });
+
+            function filterChat() {
+                const searchInput = document.querySelector('.search-bar').value.toLowerCase();
+                const chatItems = document.querySelectorAll('.chat-item');
+                chatItems.forEach(item => {
+                    if (item.textContent.toLowerCase().includes(searchInput)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+        <script>
+            function openChat(chatName) {
+                const chatContainer = document.getElementById('chatContainer');
+                const chatHeader = document.getElementById('chatHeader');
+                chatHeader.textContent = chatName;
+                chatContainer.classList.add('show');
+            }
+
+            function closeChat() {
+                const chatContainer = document.getElementById('chatContainer');
+                chatContainer.classList.remove('show');
+            }
+
+            function sendMessage() {
+                const messageInput = document.getElementById('chatInput');
+                const messageText = messageInput.value.trim();
+                if (messageText) {
+                    const chatMessages = document.getElementById('chatMessages');
+                    const messageElement = document.createElement('p');
+                    messageElement.textContent = messageText;
+                    chatMessages.appendChild(messageElement);
+                    messageInput.value = '';
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+
+            function filterChat() {
+                const searchInput = document.querySelector('.search-bar').value.toLowerCase();
+                const chatItems = document.querySelectorAll('.chat-item');
+                chatItems.forEach(item => {
+                    if (item.textContent.toLowerCase().includes(searchInput)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+    </main>
+</body>
+</html>
