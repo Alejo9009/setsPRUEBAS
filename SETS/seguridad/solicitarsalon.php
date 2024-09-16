@@ -172,7 +172,7 @@
             </div>
         </div>
     </div>
-    <a href="zonas_comunes.html" class="btn btn-success" style="font-size: 40px;">
+    <a href="zonas_comunes.php" class="btn btn-success" style="font-size: 40px;">
         <center>VOLVER</center>
     </a>
     <script>

@@ -1,5 +1,5 @@
 <?php
-include_once "conexion.php"; // Aquí mantienes tu conexión con PDO
+include_once "conexion.php";
 
 $query = "SELECT TipoZonaid, descripcion, url_videos FROM tipozona";
 
@@ -121,31 +121,59 @@ try {
         </section>
     </main>
     <main>
-       <section class="container mt-5">
-    <h1 class="title text-center mb-4">Zonas Comunes</h1>
-    <div class="row">
-        <?php if (!empty($zonas_comunes)): ?>
-            <?php foreach ($zonas_comunes as $zona): ?>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <article class="card h-100">
-                        <button class="bt5 btn btn-light">
-                            <center>
-                                <h3><?= htmlspecialchars($zona['TipoZonaid']); ?></h3>
-                            </center>
-                        </button>
-                        <video src="<?= htmlspecialchars($zona['url_videos']); ?>" class="card-img-top" autoplay loop muted></video>
-                        <div class="card-body">
-                            <h5 class="card-title"><?= htmlspecialchars($zona['descripcion']); ?></h5>
+        <br>
+        <br>
+        <section class="zones-section container mt-5">
+            <h1 class="title text-center mb-5"><b>Zonas Comunes</b></h1>
+            <div class="row">
+                <?php if (!empty($zonas_comunes)): ?>
+                    <?php foreach ($zonas_comunes as $zona): ?>
+                        <div class="col-12 col-md-6 col-lg-4 mb-4">
+                            <article class="zone">
+                                <button class="zone-type-btn">
+                                    <h3><?= htmlspecialchars($zona['TipoZonaid']); ?></h3>
+                                </button>
+                                <div class="video-wrapper">
+                                    <video src="<?= htmlspecialchars($zona['url_videos']); ?>" autoplay loop muted></video>
+                                </div>
+                                <h2 class="zone-description"><?= htmlspecialchars($zona['descripcion']); ?></h2>
+                                <?php
+                                $pagina = '';
+                                switch ($zona['TipoZonaid']) {
+                                    case '2':
+                                        $pagina = 'solicitarbbq.php';
+                                        break;
+                                    case '1':
+                                        $pagina = 'solicitarfutbol.php';
+                                        break;
+                                    case '3':
+                                        $pagina = 'solicitarsalon.php';
+                                        break;
+                                    case '4':
+                                        $pagina = 'solicitarvoley.php';
+                                        break;
+                                    default:
+                                        $pagina = '#'; 
+                                        break;
+                                }
+                                ?>
+                                <a href="<?= htmlspecialchars($pagina); ?>?id=<?= htmlspecialchars($zona['TipoZonaid']); ?>" class="btn btn-outline-success">
+                                    Ver horario disponible
+                                </a><br>
 
-                            <a href="solicitarzona.php" class="btn btn-primary">Ver horario disponible</a>
+                            </article>
+
                         </div>
-                    </article>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
-    <a href="inicioprincipal.html" class="btn btn-secondary mt-4">Volver</a>
-</section>
+
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </section>
+        <a href="inicioprincipal.php" class="btn btn-outline-danger  btn-lg">Volver</a>
+    </main>
+
+
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 

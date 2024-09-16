@@ -12,7 +12,7 @@
 
 <body>
     <header>
-    <nav class="navbar bg-body-tertiary fixed-top">
+        <nav class="navbar bg-body-tertiary fixed-top">
             <div class="container-fluid" style="background-color: #0e2c0a;">
                 <img src="img/guarda.png" alt="Logo" width="80" height="84" class="d-inline-block align-text-top" style="background-color: #0e2c0a;"><b style="font-size: 40px;color:aliceblue"> Guarda de Seguridad </b></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="background-color: white;">
@@ -59,9 +59,9 @@
                             </div>
                             <center>
                                 <li class="nav-item dropdown">
-                                    <img src="img/hablando.png" alt="Logo" width="30" height="44" class="d-inline-block align-text-top"  class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <b style="font-size: 20px;"> CHAT</b>
-                                    
+                                    <img src="img/hablando.png" alt="Logo" width="30" height="44" class="d-inline-block align-text-top" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <b style="font-size: 20px;"> CHAT</b>
+
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
                                             <center><a href="#" class="chat-item" onclick="openChat('admi')">Admi</a></center>
@@ -89,13 +89,12 @@
     </header>
     <br>
     <main>
-        <section class="chat-container" id="chatContainer">
-            <header class="chat-header">
+        <section id="chatContainer" class="chat-container position-fixed p-5 rounded-3" style="z-index: 1000; bottom: 20px; right: 20px;">
+            <div class="chat-header">
                 <span id="chatHeader">Chat</span>
                 <button class="close-btn" onclick="closeChat()">×</button>
-            </header>
-            <div class="chat-messages" id="chatMessages">
             </div>
+            <div class="chat-messages" id="chatMessages"></div>
             <div class="chat-input">
                 <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
                 <button onclick="sendMessage()">Enviar</button>
@@ -164,7 +163,7 @@
                 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
                 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
                 <br>
-                
+
                 <div class="appointment">
                     <h3>Parqueadero Moto</h3>
                     <p>Número de Parqueadero: 11</p>
@@ -175,7 +174,7 @@
                     <p>Nombre Solicitante: Carlos Gómez</p>
                     <p>Documento Solicitante: 11223344</p>
                 </div>
-                
+
                 <div class="appointment">
                     <h3>Parqueadero Moto</h3>
                     <p>Número de Parqueadero: 17</p>
@@ -194,26 +193,26 @@
         <script>
             function filterAppointments() {
                 let searchValue = document.getElementById('searchInput').value.toLowerCase();
-                
+
                 let appointments = document.querySelectorAll('.appointment');
-                
+
                 appointments.forEach(appointment => {
                     let appointmentText = appointment.textContent.toLowerCase();
-                    
+
                     if (appointmentText.includes(searchValue)) {
-                        appointment.style.display = ''; 
+                        appointment.style.display = '';
                     } else {
-                        appointment.style.display = 'none'; 
+                        appointment.style.display = 'none';
                     }
                 });
             }
         </script>
         <script>
-            document.querySelector('.admin-img').addEventListener('click', function () {
+            document.querySelector('.admin-img').addEventListener('click', function() {
                 document.querySelector('.dropdown-menu').classList.toggle('show');
             });
 
-            document.querySelector('.chat-button').addEventListener('click', function () {
+            document.querySelector('.chat-button').addEventListener('click', function() {
                 document.querySelector('.chat-menu').classList.toggle('show');
             });
 

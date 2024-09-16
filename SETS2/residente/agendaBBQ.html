@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SETS - solicitud BBQ</title>
+    <link rel="stylesheet" href="CSS/agendaBBQ.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="shortcut icon" href="img/c.png" type="image/x-icon" />
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="topbar">
+                <div class="menu-left">
+                    <div class="admin-container">
+                        <img src="img/resi.png" alt="Admin" class="admin-img">
+                        <a href="#" class="menu-button" style="color: aliceblue;">Residente</a>
+                        <ul class="dropdown-menu">
+                            <a href="Perfil.html">Editar datos</a>
+                            <a href="#">Reportar problema</a>
+                            <a href="index.html">Cerrar sesión</a>
+                        </ul>
+                    </div>
+                    <a href="notificaciones.html">
+                        <img src="img/notificacion.png" alt="Notificaciones" class="notification">
+                    </a>
+                </div>
+                <div class="menu-right">
+                    <div class="chat">
+                        <img src="img/hablando.png" alt="Chat" class="chat-button" id="chatToggle">
+
+                        <img src="img/C.png" alt="Chat" class="chat-button">
+                        <div class="chat-menu">
+                            <div class="search-container">
+                                <input type="text" placeholder="Buscar" class="search-bar" onkeyup="filterChat()">
+                            </div>
+                            <br>
+                            <ul class="chat-links">
+                                <a href="#" class="chat-item" onclick="openChat('Admi')">Admi</a>
+                                <a href="#" class="chat-item" onclick="openChat('Administrador')">Administrador</a>
+                                <a href="#" class="chat-item" onclick="openChat('Guarda De Seguridad')">Guarda DE Seguridad</a>
+                                <a href="#" class="chat-item" onclick="openChat('Chat Comunal')">Chat Comunal</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="chatContainer" class="chat-container">
+            <div class="chat-header">
+                <span id="chatHeader">Chat</span>
+                <button class="close-btn" onclick="closeChat()">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
+                <button onclick="sendMessage()">Enviar</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="login-content">
+                <form action="recuperar.html" method="post" enctype="multipart/form-data">
+                    <img src="img/BBQ.png" alt="Logo" class="imgp">
+                    <h2 class="title">Solicitud BBQ</h2>
+                    <div class="input-div one">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-fill-add" viewBox="0 0 16 16">
+                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0"/>
+                            <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7.256A4.5 4.5 0 0 0 12.5 8a4.5 4.5 0 0 0-3.59 1.787A.5.5 0 0 0 9 9.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .39-.187A4.5 4.5 0 0 0 8.027 12H6.5a.5.5 0 0 0-.5.5V16H3a1 1 0 0 1-1-1zm2 1.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3 0v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                        </svg>
+                        <div class="div">
+                            <h5>tipo de categoria zona</h5>
+                            <input type="text" class="input" name="nombre_evento" required>
+                        </div>
+                    </div>
+                    <div class="input-div one">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
+                          </svg>
+                        <div class="div">
+                            <h5 class="input-title">hora</h5>
+                            <input type="time" class="input" name="fecha" required>
+                        </div>
+                    </div>
+                    <div class="input-div one">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-day-fill" viewBox="0 0 16 16">
+                            <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16zm-4.785-6.145a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43c0 .238.192.425.43.425m.336.563h-.672v4.105h.672zm-6.867 4.105v-2.3h2.261v-.61H4.684V7.801h2.464v-.61H4v5.332zm3.296 0h.676V9.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a2 2 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98z"/>
+                        </svg>
+                        <div class="div">
+                            <h5 class="input-title">Fecha</h5>
+                            <input type="date" class="input" name="fecha" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-div one">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-fill" viewBox="0 0 16 16">
+                            <path d="M3 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3v-3.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V16h3a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm1 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5M4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5m2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5m2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5"/>
+                          </svg>
+                        <div class="div">
+                            <h5>apartamento</h5>
+                            <input type="number" class="input" name="descripcion_evento" required>
+                        </div>
+                    </div>
+                    
+                    <input type="submit" class="btn" value="Enviar" style="color: aliceblue;">
+                    <a href="zonas_comunes.html" class="btn small-btn" style="color: aliceblue;">VOLVER</a>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src="JAVA/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.querySelector('.admin-img').addEventListener('click', function() {
+            document.querySelector('.dropdown-menu').classList.toggle('show');
+        });
+
+        document.querySelector('.chat-button').addEventListener('click', function() {
+            document.querySelector('.chat-menu').classList.toggle('show');
+        });
+
+        function filterChat() {
+            const searchInput = document.querySelector('.search-bar').value.toLowerCase();
+            const chatItems = document.querySelectorAll('.chat-item');
+            chatItems.forEach(item => {
+                if (item.textContent.toLowerCase().includes(searchInput)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+    <script>
+        function openChat(chatName) {
+            const chatContainer = document.getElementById('chatContainer');
+            const chatHeader = document.getElementById('chatHeader');
+            chatHeader.textContent = chatName;
+            chatContainer.classList.add('show');
+        }
+
+        function closeChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.classList.remove('show');
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('chatInput');
+            const messageText = messageInput.value.trim();
+            if (messageText) {
+                const chatMessages = document.getElementById('chatMessages');
+                const messageElement = document.createElement('p');
+                messageElement.textContent = messageText;
+                chatMessages.appendChild(messageElement);
+                messageInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        function filterChat() {
+            const searchInput = document.querySelector('.search-bar').value.toLowerCase();
+            const chatItems = document.querySelectorAll('.chat-item');
+            chatItems.forEach(item => {
+                if (item.textContent.toLowerCase().includes(searchInput)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

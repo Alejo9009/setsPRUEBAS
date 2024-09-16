@@ -39,7 +39,7 @@ try {
                         </ul>
                     </div>
                     <a href="notificaciones.html">
-                        <img src="img/notificacion.png" alt="Notificaciones" class="notification">
+                            <img src="img/notificacion.png" alt="Notificaciones" class="notification">
                     </a>
                 </div>
                 <div class="menu-right">
@@ -83,7 +83,7 @@ try {
         <main>
             <section>
                 <h1 class="title">Zonas Comunes</h1>
-                <div class="zones-container">
+                <div class="zones-container col-6 col-sm-4">
                     <?php if (!empty($zonas_comunes)): ?>
                         <?php foreach ($zonas_comunes as $zona): ?>
                             <article class="zone">
@@ -97,7 +97,7 @@ try {
                                 <a href="solicitarzona.php" class="bt2">
                                     <h3>Ver horario disponible</h3>
                                 </a><br>
-                                <a class="bt3" href="agendasaloncomunal.html">
+                                <a class="bt3" href="agendasaloncomunal.php">
                                     <center>
                                         <h3>Solicitar</h3>
                                     </center>

@@ -1,16 +1,13 @@
 <?php
 include_once "conexion.php";
-// Verificar que la conexión está establecida
 if (!$base_de_datos) {
     exit('Error en la conexión a la base de datos.');
 }
 
-// Consulta para obtener anuncios
 $sql = "SELECT * FROM anuncio";
 $result = $base_de_datos->query($sql);
 
 if ($result->rowCount() > 0) {
-    // Mostrar datos de cada anuncio
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $isEvent = strpos($row["titulo"], "Evento") !== false;
     }
@@ -118,7 +115,7 @@ if ($result->rowCount() > 0) {
             <div class="chat-messages" id="chatMessages">
             </div>
             <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
+                <input type="text" id="chatInput" style="font-size: 14px;" placeholder="Escribe tu mensaje...">
                 <button onclick="sendMessage()">Enviar</button>
             </div>
         </div>
@@ -158,160 +155,170 @@ if ($result->rowCount() > 0) {
                     </div>
                 </section>
 
-                <br>
-                <br><br>
-                <main>
-                    <div class="container">
-                        <section class="announcements">
-                            <center>
-                                <h2>Anuncios</h2>
-                            </center>
-                            <div class="search-container">
-                                <input type="text" placeholder="Buscar Anuncio">
-                                <img src="img/lupa.png" alt="Buscar" class="search-icon">
-                            </div>
+            </div>
 
-                            <?php
-                            // Asegúrate de que $base_de_datos esté disponible y sea una instancia válida de PDO
-                            $sql = "SELECT * FROM anuncio";
-                            $result = $base_de_datos->query($sql);
 
-                            if ($result->rowCount() > 0) {
-                                // Mostrar datos de cada anuncio
-                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                    $isEvent = strpos($row["titulo"], "Evento") !== false;
-                            ?>
+            <br>
+            <br><br>
+            <main>
+                <div class="container">
+                    <section class="announcements">
+                        <center>
+                            <h2>Anuncios</h2>
+                        </center>
+                        <div class="search-container">
+                            <input type="text" placeholder="Buscar Anuncio">
+                            <img src="img/lupa.png" alt="Buscar" class="search-icon">
+                        </div>
 
-                                    <div class="announcement">
-                                        <img src="<?= htmlspecialchars($row['img_anuncio']); ?>" alt="Imagen del video" style="width:100%; max-width:100px;">
-                                        <p>Anuncio: <?php echo htmlspecialchars($row["titulo"]); ?><br>
-                                            <?php echo htmlspecialchars($row["descripcionAnuncio"]); ?><br>
-                                            Fecha de Publicación: <?php echo htmlspecialchars($row["fechaPublicacion"]); ?><br>
-                                            Hora de Publicación: <?php echo htmlspecialchars($row["horaPublicacion"]); ?><br>
-                                        </p>
+                        <?php
 
-                                    </div>
+                        $sql = "SELECT * FROM anuncio";
+                        $result = $base_de_datos->query($sql);
 
-                            <?php
-                                }
-                            } else {
-                                echo "No hay anuncios disponibles.";
+                        if ($result->rowCount() > 0) {
+
+                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                $isEvent = strpos($row["titulo"], "Evento") !== false;
+                        ?>
+
+                                <div class="announcement">
+                                    <img src="<?= htmlspecialchars($row['img_anuncio']); ?>" alt="Imagen del video" style="width:100%; max-width:100px;">
+                                    <p>Anuncio: <?php echo htmlspecialchars($row["titulo"]); ?><br>
+                                        <?php echo htmlspecialchars($row["descripcionAnuncio"]); ?><br>
+                                        Fecha de Publicación: <?php echo htmlspecialchars($row["fechaPublicacion"]); ?><br>
+                                        Hora de Publicación: <?php echo htmlspecialchars($row["horaPublicacion"]); ?><br>
+                                    </p>
+                                    <div class="button-margin"></div>
+                                        <form action="eliminaranuncio.php" method="POST" onsubmit="return confirm('¿Está seguro de que desea eliminar este anuncio?');">
+                                            <input type="hidden" name="titulo" value="<?php echo htmlspecialchars($row['titulo']); ?>">
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                </div>
+
+                        <?php
                             }
+                        } else {
+                            echo "No hay anuncios disponibles.";
+                        }
 
-                            // Cerrar conexión
-                            $base_de_datos = null;
-                            ?>
-                            <div class="icon">
-                                <a href="añadiranuncio.php" class="link-button">
-                                    <button class="add-announcement">Añadir Anuncio</button>
-                                </a>
-                            </div>
-                        </section>
-                    </div>
+                        $base_de_datos = null;
+                        ?>
+                        <div class="icon">
+                            <a href="añadiranuncio.php" class="link-button">
+                                <button class="add-announcement">Añadir Anuncio</button>
+                            </a>
+                        </div>
+                    </section>
+                </div>
 
-                    <script>
+                <script>
                         function confirmDelete(id) {
                             if (confirm("¿Está seguro de que desea eliminar este anuncio?")) {
                                 window.location.href = 'eliminaranuncio.php?id=' + id;
                             }
                         }
                     </script>
-                    <script>
-                        const searchEventInput = document.getElementById('searchEventInput');
-                        const events = document.querySelectorAll('.event');
+                <script>
+                    const searchEventInput = document.getElementById('searchEventInput');
+                    const events = document.querySelectorAll('.event');
 
-                        searchEventInput.addEventListener('input', function() {
-                            const filter = searchEventInput.value.toLowerCase();
+                    searchEventInput.addEventListener('input', function() {
+                        const filter = searchEventInput.value.toLowerCase();
 
-                            events.forEach(function(event) {
-                                const text = event.textContent.toLowerCase();
-                                if (text.includes(filter)) {
-                                    event.style.display = 'block';
-                                } else {
-                                    event.style.display = 'none';
-                                }
-                            });
-                        });
-                    </script>
-                    <script>
-                        const searchInput = document.getElementById('searchInput');
-                        const announcements = document.querySelectorAll('.announcement');
-
-
-                        searchInput.addEventListener('input', function() {
-                            const filter = searchInput.value.toLowerCase();
-
-
-                            announcements.forEach(function(announcement) {
-                                const text = announcement.textContent.toLowerCase();
-                                if (text.includes(filter)) {
-                                    announcement.style.display = 'block';
-                                } else {
-                                    announcement.style.display = 'none';
-                                }
-                            });
-                        });
-                    </script>
-                    <script>
-                        document.querySelector('.admin-img').addEventListener('click', function() {
-                            document.querySelector('.dropdown-menu').classList.toggle('show');
-                        });
-
-                        document.querySelector('.chat-button').addEventListener('click', function() {
-                            document.querySelector('.chat-menu').classList.toggle('show');
-                        });
-
-                        function filterChat() {
-                            const searchInput = document.querySelector('.search-bar').value.toLowerCase();
-                            const chatItems = document.querySelectorAll('.chat-item');
-                            chatItems.forEach(item => {
-                                if (item.textContent.toLowerCase().includes(searchInput)) {
-                                    item.style.display = 'block';
-                                } else {
-                                    item.style.display = 'none';
-                                }
-                            });
-                        }
-                    </script>
-                    <script>
-                        function openChat(chatName) {
-                            const chatContainer = document.getElementById('chatContainer');
-                            const chatHeader = document.getElementById('chatHeader');
-                            chatHeader.textContent = chatName;
-                            chatContainer.classList.add('show');
-                        }
-
-                        function closeChat() {
-                            const chatContainer = document.getElementById('chatContainer');
-                            chatContainer.classList.remove('show');
-                        }
-
-                        function sendMessage() {
-                            const messageInput = document.getElementById('chatInput');
-                            const messageText = messageInput.value.trim();
-                            if (messageText) {
-                                const chatMessages = document.getElementById('chatMessages');
-                                const messageElement = document.createElement('p');
-                                messageElement.textContent = messageText;
-                                chatMessages.appendChild(messageElement);
-                                messageInput.value = '';
-                                chatMessages.scrollTop = chatMessages.scrollHeight;
+                        events.forEach(function(event) {
+                            const text = event.textContent.toLowerCase();
+                            if (text.includes(filter)) {
+                                event.style.display = 'block';
+                            } else {
+                                event.style.display = 'none';
                             }
-                        }
+                        });
+                    });
+                </script>
+                <script>
+                    const searchInput = document.getElementById('searchInput');
+                    const announcements = document.querySelectorAll('.announcement');
 
-                        function filterChat() {
-                            const searchInput = document.querySelector('.search-bar').value.toLowerCase();
-                            const chatItems = document.querySelectorAll('.chat-item');
-                            chatItems.forEach(item => {
-                                if (item.textContent.toLowerCase().includes(searchInput)) {
-                                    item.style.display = 'block';
-                                } else {
-                                    item.style.display = 'none';
-                                }
-                            });
+
+                    searchInput.addEventListener('input', function() {
+                        const filter = searchInput.value.toLowerCase();
+
+
+                        announcements.forEach(function(announcement) {
+                            const text = announcement.textContent.toLowerCase();
+                            if (text.includes(filter)) {
+                                announcement.style.display = 'block';
+                            } else {
+                                announcement.style.display = 'none';
+                            }
+                        });
+                    });
+                </script>
+                <script>
+                    document.querySelector('.admin-img').addEventListener('click', function() {
+                        document.querySelector('.dropdown-menu').classList.toggle('show');
+                    });
+
+                    document.querySelector('.chat-button').addEventListener('click', function() {
+                        document.querySelector('.chat-menu').classList.toggle('show');
+                    });
+
+                    function filterChat() {
+                        const searchInput = document.querySelector('.search-bar').value.toLowerCase();
+                        const chatItems = document.querySelectorAll('.chat-item');
+                        chatItems.forEach(item => {
+                            if (item.textContent.toLowerCase().includes(searchInput)) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                </script>
+                <script>
+                    function openChat(chatName) {
+                        const chatContainer = document.getElementById('chatContainer');
+                        const chatHeader = document.getElementById('chatHeader');
+                        chatHeader.textContent = chatName;
+                        chatContainer.classList.add('show');
+                    }
+
+                    function closeChat() {
+                        const chatContainer = document.getElementById('chatContainer');
+                        chatContainer.classList.remove('show');
+                    }
+
+                    function sendMessage() {
+                        const messageInput = document.getElementById('chatInput');
+                        const messageText = messageInput.value.trim();
+                        if (messageText) {
+                            const chatMessages = document.getElementById('chatMessages');
+                            const messageElement = document.createElement('p');
+                            messageElement.textContent = messageText;
+                            chatMessages.appendChild(messageElement);
+                            messageInput.value = '';
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
                         }
-                    </script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                    }
+
+                    function filterChat() {
+                        const searchInput = document.querySelector('.search-bar').value.toLowerCase();
+                        const chatItems = document.querySelectorAll('.chat-item');
+                        chatItems.forEach(item => {
+                            if (item.textContent.toLowerCase().includes(searchInput)) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+            </main>
+</header>
+
 </body>
+
 
 </html>

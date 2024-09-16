@@ -2,12 +2,12 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+ 
 }
 
 .topbar {
   display: flex;
-  flex-wrap: wrap; /* Esto permite que los elementos se ajusten en varias líneas en pantallas pequeñas */
+  flex-wrap: wrap; 
   justify-content: space-between;
   align-items: center;
   background-color: #0d2219;
@@ -20,7 +20,7 @@ body {
 .menu-right {
   display: flex;
   align-items: center;
-  flex-wrap: wrap; /* Permitir que los elementos se ajusten en varias líneas si es necesario */
+  flex-wrap: wrap; 
 }
 
 .menu-button {

@@ -7,12 +7,13 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    overflow-y: scroll;
 }
 
 .topbar {
     display: flex;
     flex-wrap: wrap;
-    /* Esto permite que los elementos se ajusten en varias líneas en pantallas pequeñas */
+  
     justify-content: space-between;
     align-items: center;
     background-color: #0d2219;
@@ -26,7 +27,7 @@ body {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    /* Permitir que los elementos se ajusten en varias líneas si es necesario */
+  
 }
 
 .menu-button {
@@ -235,111 +236,63 @@ h1 {
 .title {
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #0e6447;
-
+    color: #061d15;
     font-size: 50px;
 }
 
-.zones-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 50px;
-}
-
 .zone {
+    background-color: #f0fff8;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    background-color: rgb(201, 255, 213);
     padding: 20px;
-    border-radius: 9px;
-    box-shadow: 0px 8px 12px rgb(39, 202, 18);
-    flex: 1;
-    margin: 0 70px;
+    transition: transform 0.3s ease-in-out;
 }
 
-.zone video {
-    width: 280px;
-    height: 280px;
-    margin-bottom: 10px;
+.zone:hover {
+    transform: translateY(-10px);
+}
+
+.video-wrapper {
+    margin: 20px 0;
+    position: relative;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 300px;
     border-radius: 8px;
     object-fit: cover;
-    box-shadow: 0px 4px 8px rgb(2, 43, 27);
+    box-shadow: 0 4px 6px rgb(36, 82, 60);
+}
+
+.zone-description {
+    font-size: 1.2rem;
+    color: #000000;
+    margin: 25px 0;
+}
+
+.zone-type-btn {
+    background-color: #004d40;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    cursor: pointer;
+    align-items: baseline;
 }
 
 
-.zone h2 {
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
     margin: 10px 0;
-    font-size: 28px;
-    color: #0a4917;
-}
-
-.zone h3 {
-    margin: 2px 0;
-    font-size: 20px;
-    color: #ffffff;
-    text-align: center;
-}
-
-
-.bt2 {
-    background-image: linear-gradient(to right, #68a792, #0f5a41, #0f2b22);
-    transition: .5s;
-    background-size: 100%;
-    outline: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    padding: 20px;
-    border: none;
-    display: flex;
-    text-decoration: none;
-}
-
-.bt5 {
-    background-image: linear-gradient(to right, #68a792, #0f5a41, #0f2b22);
-    transition: .5s;
-    background-size: 100%;
-    outline: none;
-    border: none;
-    color: white;
-    border-radius: 4px;
-    padding: 20px;
-    border: none;
-    display: flex;
-}
-
-.bt3 {
-    position: center;
-    background-image: linear-gradient(to right, #0f5a41, #0f2b22);
-    background-size: 100%;
-    outline: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    padding: 20px;
-    border: none;
-    margin: 10px 0;
-    text-decoration: none;
-    display: flex;
-    text-align: center;
-}
-
-
-.btnsmall-btn {
-    background-image: linear-gradient(to right, #68a792, #0f5a41, #0f2b22);
-    transition: .5s;
-    background-size: 200%;
-    outline: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    padding: 20px;
-    border: none;
-    margin: 26px 0;
-    position: center;
-    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
 }
 
 
@@ -405,30 +358,4 @@ h1 {
     color: #fff;
     cursor: pointer;
     border-radius: 5px;
-}
-/* Video responsive dentro de la tarjeta */
-.card video {
-    width: 50%;
-    height: 50%;
-}
-
-/* Estilos adicionales opcionales para títulos */
-.title {
-    font-size: 2rem;
-    color: #000000;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Botón personalizado si no estás usando Bootstrap */
-.btnsmall-btn {
-    padding: 10px 20px;
-    background-color: #2d455a;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.btnsmall-btn:hover {
-    background-color: #5a6268;
 }

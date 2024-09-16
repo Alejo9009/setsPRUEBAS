@@ -12,6 +12,9 @@
 
 <body>
     <header>
+        <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
+            <div class="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#d5c5ff,transparent)]"></div>
+        </div>
         <nav class="navbar bg-body-tertiary fixed-top">
             <div class="container-fluid" style="background-color: #0e2c0a;">
                 <img src="img/guarda.png" alt="Logo" width="80" height="84" class="d-inline-block align-text-top" style="background-color: #0e2c0a;"><b style="font-size: 40px;color:aliceblue"> Guarda de Seguridad </b></a>
@@ -58,10 +61,10 @@
                                 </center>
                             </div>
                             <center>
-                                <li class="nav-item dropdown">
-                                    <img src="img/hablando.png" alt="Logo" width="30" height="44" class="d-inline-block align-text-top"  class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <b style="font-size: 20px;"> CHAT</b>
-                                    
+                                <li class="nav-item dropdown " style="background: border-box;">
+                                    <img src="img/hablando.png" alt="Logo" width="30" height="44" class="d-inline-block align-text-top" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <b style="font-size: 20px;"> CHAT</b>
+
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
                                             <center><a href="#" class="chat-item" onclick="openChat('admi')">Admi</a></center>
@@ -100,9 +103,11 @@
         </div>
     </div>
     <main>
+<br>
+<br>
+<br>
 
-
-        <h1 class="responsive-title">Normas De Convivencia</h1>
+        <h1 class="responsive-title"><b>Normas De Convivencia</b></h1>
 
         <br>
         <center>

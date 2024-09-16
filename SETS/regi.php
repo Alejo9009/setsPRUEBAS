@@ -1,5 +1,5 @@
 <?php
-// Conexión a la base de datos
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -7,12 +7,11 @@ $dbname = "sets";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verificar conexión
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Obtener datos del formulario
 $primerNombre = $_POST['primerNombre'];
 $segundoNombre = $_POST['segundoNombre'];
 $primerApellido = $_POST['primerApellido'];
@@ -40,13 +39,11 @@ $stmtTel = $conn->prepare($sqlTel);
 $stmtTel->bind_param("ii", $numeroTel, $idRegistro);
 $stmtTel->execute();
 
-// Insertar datos en la tabla rol_registro
 $sqlRolReg = "INSERT INTO rol_registro (idROL, idRegistro) VALUES (?, ?)";
 $stmtRolReg = $conn->prepare($sqlRolReg);
 $stmtRolReg->bind_param("ii", $rol, $idRegistro);
 $stmtRolReg->execute();
 
-// Obtener el nombre del rol para redirección
 $sqlRoleDesc = "SELECT Roldescripcion FROM rol WHERE id = ?";
 $stmtRoleDesc = $conn->prepare($sqlRoleDesc);
 $stmtRoleDesc->bind_param("i", $rol);
@@ -60,7 +57,7 @@ $stmtTel->close();
 $stmtRolReg->close();
 $conn->close();
 
-// Redirigir según el rol
+
 switch ($rolDescripcion) {
     case 'admi':
         header("Location:  ../SETS/admi/inicioprincipal.php");

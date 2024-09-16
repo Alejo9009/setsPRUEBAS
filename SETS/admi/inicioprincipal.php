@@ -1,16 +1,15 @@
 <?php
 include_once "conexion.php";
-// Verificar que la conexión está establecida
+
 if (!$base_de_datos) {
     exit('Error en la conexión a la base de datos.');
 }
 
-// Consulta para obtener anuncios
 $sql = "SELECT * FROM anuncio";
 $result = $base_de_datos->query($sql);
 
 if ($result->rowCount() > 0) {
-    // Mostrar datos de cada anuncio
+
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $isEvent = strpos($row["titulo"], "Evento") !== false;
     }

@@ -1,3 +1,19 @@
+<?php
+include_once "conexion.php";
+
+$query = "SELECT id_Parqueadero, numero_Parqueadero, disponibilidad FROM parqueadero";
+
+try {
+    $statement = $base_de_datos->prepare($query);
+    $statement->execute();
+    $parqueaderos = $statement->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error al ejecutar la consulta: " . $e->getMessage();
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,7 +28,7 @@
 
 <body>
     <header>
-    <nav class="navbar bg-body-tertiary fixed-top">
+        <nav class="navbar bg-body-tertiary fixed-top">
             <div class="container-fluid" style="background-color: #0e2c0a;">
                 <img src="img/guarda.png" alt="Logo" width="80" height="84" class="d-inline-block align-text-top" style="background-color: #0e2c0a;"><b style="font-size: 40px;color:aliceblue"> Guarda de Seguridad </b></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="background-color: white;">
@@ -59,9 +75,9 @@
                             </div>
                             <center>
                                 <li class="nav-item dropdown">
-                                    <img src="img/hablando.png" alt="Logo" width="30" height="44" class="d-inline-block align-text-top"  class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <b style="font-size: 20px;"> CHAT</b>
-                                    
+                                    <img src="img/hablando.png" alt="Logo" width="30" height="44" class="d-inline-block align-text-top" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <b style="font-size: 20px;"> CHAT</b>
+
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
                                             <center><a href="#" class="chat-item" onclick="openChat('admi')">Admi</a></center>
@@ -129,75 +145,49 @@
                     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
                 </div>
                 <div class="torress">
-                    <div class="content">
-                        <h3 class="torres-title">01</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
+                    <div class="container">
+                        <div class="row">
+                            <?php if (!empty($parqueaderos)): ?>
+                                <?php foreach ($parqueaderos as $index => $parqueadero): ?>
+                                    <div class="col-6 col-md-2 mb-4">
+                                        <div class="card text-center">
+                                            <h3 class="torres-title"><?= htmlspecialchars($parqueadero['numero_Parqueadero']); ?></h3>
+                                            <img src="img/moto.png" alt="" class="product-img">
 
+                                            <button class="btn <?= ($parqueadero['disponibilidad'] === 'SI ESTA DISPONIBLE') ? 'btn-success' : 'btn-danger'; ?>" style="font-size: 13px;">
+                                                <?= htmlspecialchars($parqueadero['disponibilidad']); ?>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <?php if (($index + 1) % 5 == 0): ?>
+                        </div>
+                        <div class="row">
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                        </div>
                     </div>
+                    <br>
 
-                    <div class="content">
-                        <h3 class="torres-title">02</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
-
-                    </div>
-
-                    <div class="content">
-                        <h3 class="torres-title">03</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
-
-                    </div>
-                    <div class="content">
-                        <h3 class="torres-title">04</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
-
-                    </div>
-                    <div class="content">
-                        <h3 class="torres-title">05</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
-
-                    </div>
-                    <div class="content">
-                        <h3 class="torres-title">06</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
-
-                    </div>
-                    <div class="content">
-                        <h3 class="torres-title">07</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
-
-                    </div>
-                    <div class="content">
-                        <h3 class="torres-title">08</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
-
-                    </div>
-                    <div class="content">
-                        <h3 class="torres-title">09</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
-
-                    </div>
-                    <div class="content">
-                        <h3 class="torres-title">10</h3>
-                        <img src="img/moto.png" alt="" class="product-img">
-
-                    </div>
                 </div>
-            </div>
-            <br>
 
-            <center><a href="hoariomoto.php" class="small-btn" style="text-decoration: none;">Ver horario
-                disponible</a></center>
-        </div>
-        <a href="inicioprincipal.php" class="btn btn-outline-success" style=" font-size:30px;">
-            <center>VOLVER</center>
-        </a>
+                <center><a href="hoariomoto.php" class="small-btn" style="text-decoration: none;">Ver horario
+                        disponible</a></center>
+
+                <br>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="inicioprincipal.php" class="btn btn-outline-success" style=" font-size:30px;">
+                        <center>VOLVER</center>
+                    </a>
+                </div>
     </main>
     <script>
-        document.querySelector('.admin-img').addEventListener('click', function () {
+        document.querySelector('.admin-img').addEventListener('click', function() {
             document.querySelector('.dropdown-menu').classList.toggle('show');
         });
 
-        document.querySelector('.chat-button').addEventListener('click', function () {
+        document.querySelector('.chat-button').addEventListener('click', function() {
             document.querySelector('.chat-menu').classList.toggle('show');
         });
 

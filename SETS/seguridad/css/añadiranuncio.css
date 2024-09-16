@@ -9,6 +9,7 @@ body {
     overflow: hidden;
     background: url('../img/aw.jpg') no-repeat center center fixed;
     background-size: cover;
+    overflow-y: scroll;
 }
 
 .container {
@@ -17,7 +18,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
+    padding-top: 100px;
 }
 
 .login-content {
@@ -42,28 +43,24 @@ body {
     margin: 15px 0;
     color: #1c4125;
     text-transform: uppercase;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 }
 
 .input-div {
     position: relative;
     display: flex;
     align-items: center;
-    margin: 25px 0;
-    padding: 5px 0;
+    margin: 18px 0;  
+    padding: 20px 0; 
     border-bottom: 2px solid #113d17;
+    margin-top: 20px;
 }
-
 .input-div .i {
     color: #0e2b1b;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 40px;
-}
-
-.input-div .i i {
-    transition: .3s;
 }
 
 .input-div .div {
@@ -82,43 +79,12 @@ body {
     transition: .3s;
 }
 
-.input-div:before,
-.input-div:after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    width: 0%;
-    height: 2px;
-    background-color: #0b3528;
-    transition: .4s;
-}
+.input-div.one .input-title {
+    margin-bottom: 70px; 
 
-.input-div:before {
-    right: 50%;
-}
-
-.input-div:after {
-    left: 50%;
-}
-
-.input-div.focus:before,
-.input-div.focus:after {
-    width: 50%;
-}
-
-.input-div.focus > .div > h5 {
-    top: -25px;
-    font-size: 15px;
-}
-
-.input-div.focus > .i > i {
-    color: #031b0d;
 }
 
 .input-div .div > input {
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
     height: 100%;
     border: none;
@@ -128,22 +94,8 @@ body {
     font-size: 1.2rem;
     color: #0c3024;
     font-family: 'Poppins', sans-serif;
+    margin-top: 20px;
 }
-
-a {
-    display: block;
-    text-align: right;
-    text-decoration: none;
-    color: #05160c;
-    font-size: 0.9rem;
-    transition: .3s;
-    margin-top: 10px;
-}
-
-a:hover {
-    color: #0c2011;
-}
-
 
 
 .btn:hover {
@@ -156,6 +108,7 @@ a:hover {
     padding: 0 10px;
     font-size: 1rem;
     margin: 0.4rem 0;
+    text-decoration: none;
 }
 
 .input-div.one:nth-child(5) {
@@ -164,7 +117,7 @@ a:hover {
 
 .input-div.one:nth-child(5) .div > h5 {
     top: -5px;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 @media screen and (max-width: 1050px) {
@@ -193,6 +146,7 @@ a:hover {
         width: 100%;
     }
 }
+
 
 .topbar {
     width: 100%;
@@ -337,7 +291,7 @@ a:hover {
     top: -5px;
     color: #0c2b10;
     font-size: 15px;
-    transition: .3s;
+
 }
 
 .input-div.focus .i i {
@@ -380,18 +334,20 @@ a:hover {
     background: #38d39f;
 }
 
-
 .chat-container {
     position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 300px;
-    height: 400px;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    bottom: 20px;
+    right: 20px;
+    width: 550px;
+    height: 500px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     display: none;
     flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .chat-container.show {
@@ -401,45 +357,71 @@ a:hover {
 .chat-header {
     background-color: #0b775c;
     color: #fff;
-    padding: 10px;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
 }
 
 .close-btn {
     background: none;
     border: none;
     color: #fff;
-    font-size: 20px;
+    font-size: 22px;
     cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #520505;
 }
 
 .chat-messages {
     flex: 1;
-    padding: 10px;
+    padding: 15px;
     overflow-y: auto;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
 }
 
 .chat-input {
     display: flex;
     padding: 10px;
-    background-color: #eee;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
 }
 
 .chat-input input {
     flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease;
+}
+
+.chat-input input:focus {
+    border-color: #0b775c;
 }
 
 .chat-input button {
-    padding: 10px;
+    padding: 12px 20px;
     margin-left: 10px;
     background-color: #0b775c;
     border: none;
     color: #fff;
     cursor: pointer;
-    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.chat-input button:hover {
+    background-color: #0a6b53;
 }
